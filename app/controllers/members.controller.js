@@ -69,17 +69,35 @@ exports.findByRanking = (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving members."
+          err.message || "Erreur lors de la récupération des membres."
       });
     else res.send(data);
   });
   
 };
 
-exports.findByRankId = (req, res) => {
-  const RankId = req.query.RankId;
+// exports.findByRankId = (req, res) => {
+//   const RankId = req.query.RankId;
 
-  members.getAll(RankId, (err, data) => {
+//   members.getAll(RankId, (err, data) => {
+//     if (err)
+//       res.status(500).send({
+//         message:
+//           err.message || "Erreur lors de la récupération des membres."
+//       });
+//     else res.send(data);
+//   });
+  
+// };
+
+exports.findByMultipleFilters = (req, res) => {
+  const gender = req.query.gender;
+  const minAge = req.query.minAge;
+  const maxAge = req.query.maxAge;
+  const minRank = req.query.minRank;
+  const maxRank = req.query.maxRank;
+
+  members.getByMultipleFilters(gender, minAge, maxAge, minRank, maxRank, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -87,7 +105,7 @@ exports.findByRankId = (req, res) => {
       });
     else res.send(data);
   });
-  
+
 };
 
 // Find a single members with a id

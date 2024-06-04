@@ -7,6 +7,8 @@ module.exports = app => {
     router.get("/findByGender/?", members.findByGender);
     router.get("/findByAge/?", members.findByAge);
     router.get("/findByRanking/?", members.findByRanking);
+    // router.get("/findByRankId/?", members.findByRankId);
+    router.get("/findByMultipleFilters/?", members.findByMultipleFilters);
   
     app.use('', router);
   };
