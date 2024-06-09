@@ -75,6 +75,54 @@ Members.getAllBetweenRanks = (minRank, maxRank, result) => {
   );
 }
 
+Members.getByGenderAge = (gender, minAge, maxAge, result) => {
+  sql.query(
+    `SELECT * FROM members WHERE Gender = ${gender} AND Age BETWEEN ${minAge} AND ${maxAge}`
+    , (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      console.log("members: ", res);
+      result(null, res);
+    }
+  );
+}
+
+Members.getByGenderRank = (gender, minRank, maxRank, result) => {
+  sql.query(
+    `SELECT * FROM members WHERE Gender = ${gender} AND RankId BETWEEN ${minRank} AND ${maxRank}`
+    , (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      console.log("members: ", res);
+      result(null, res);
+    }
+  );
+}
+
+Members.getByAgeRank = (minAge, maxAge, minRank, maxRank, result) => {
+  sql.query(
+    `SELECT * FROM members WHERE Age BETWEEN ${minAge} AND ${maxAge} AND RankId BETWEEN ${minRank} AND ${maxRank}`
+    , (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      console.log("members: ", res);
+      result(null, res);
+    }
+  );
+}
+
 Members.getByMultipleFilters = (gender, minAge, maxAge, minRank, maxRank, result) => {
   sql.query(
     `SELECT * FROM members WHERE Gender = ${gender} AND Age BETWEEN ${minAge} AND ${maxAge} AND RankId BETWEEN ${minRank} AND ${maxRank}`

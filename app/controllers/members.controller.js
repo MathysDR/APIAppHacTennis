@@ -90,6 +90,55 @@ exports.findByRanking = (req, res) => {
   
 // };
 
+exports.findByGenderAge = (req, res) => {
+  const gender = req.query.gender;
+  const minAge = req.query.minAge;
+  const maxAge = req.query.maxAge;
+
+  members.getByGenderAge(gender, minAge, maxAge, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving members."
+      });
+    else res.send(data);
+  });
+
+};
+
+exports.findByGenderRank = (req, res) => {
+  const gender = req.query.gender;
+  const minRank = req.query.minRank;
+  const maxRank = req.query.maxRank;
+
+  members.getByGenderRank(gender, minRank, maxRank, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving members."
+      });
+    else res.send(data);
+  });
+
+};
+
+exports.findByAgeRank = (req, res) => {
+  const minAge = req.query.minAge;
+  const maxAge = req.query.maxAge;
+  const minRank = req.query.minRank;
+  const maxRank = req.query.maxRank;
+
+  members.getByAgeRank(minAge, maxAge, minRank, maxRank, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving members."
+      });
+    else res.send(data);
+  });
+
+};
+
 exports.findByMultipleFilters = (req, res) => {
   const gender = req.query.gender;
   const minAge = req.query.minAge;
